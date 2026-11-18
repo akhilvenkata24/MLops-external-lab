@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install fastapi uvicorn pydantic numpy pandas scikit-learn pytest httpx
+
+      - name: Create model artifact for tests
+        run: |
+          mkdir -p models
+          python - <<'PY'
+          import numpy as np
+          import pickle
+          from sklearn.dummy import DummyRegressor
+
+          X = np.array([
+              [5.0, 2, 50.0, 30.0, 2.0, 30.0, 5.0, 0.4, 0],
+              [4.0, 1, 60.0, 28.0, 1.5, 20.0, 2.4, 0.375, 1],
+              [6.5, 3, 80.0, 26.0, 1.0, 50.0, 15.6, 0.1538, 0],
+          ], dtype=float)
+          y = np.array([12.0, 10.0, 20.0], dtype=float)
+
+          model = DummyRegressor(strategy="mean")
+          model.fit(X, y)
+
+          with open("models/best_model.pkl", "wb") as f:
+              pickle.dump(model, f)
+          PY
+
+      - name: Run tests
+        run: pytest -q
