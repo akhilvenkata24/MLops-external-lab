@@ -1,0 +1,5 @@
+Model,MAE,RMSE,R2
+Ridge (Normal),0.357,0.435,0.982
+Ridge (Monsoon),0.384,0.492,0.978
+Random Forest (Normal),0.421,0.579,0.967
+Random Forest (Monsoon),0.324,0.504,0.977
