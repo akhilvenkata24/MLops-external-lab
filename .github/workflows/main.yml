@@ -30,6 +30,7 @@ jobs:
       - name: Validate trained model artifact
         run: |
           test -f models/best_model.pkl
+          python -c "import pickle; m=pickle.load(open('models/best_model.pkl','rb')); assert m.__class__.__name__ == 'Ridge'"
 
       - name: Run tests
         run: pytest -q
