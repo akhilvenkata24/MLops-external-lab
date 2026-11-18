@@ -20,5 +20,12 @@
     "mae": 0.368853,
     "rmse": 0.448382,
     "r2_score": 0.989953
+  },
+  "mlflow": {
+    "tracking_uri": "sqlite:///C:\\Users\\akhil\\Downloads\\Kalamkari_Drying_Time_Project\\mlflow.db",
+    "experiment": "Kalamkari_Drying_Time",
+    "run_id": "01550df6f3d84063b1d6bdbc44649b83",
+    "registered_model": "KalamkariDryingTimeBestModel",
+    "model_version": 1
   }
 }
