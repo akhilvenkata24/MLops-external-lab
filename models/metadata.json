@@ -1,0 +1,24 @@
+{
+  "model_name": "Ridge Regression",
+  "source": "retrained_from_existing_data",
+  "train_test_split": {
+    "test_size": 0.2,
+    "random_state": 42
+  },
+  "features": [
+    "fabric_length_meters",
+    "dye_coats",
+    "humidity_percentage",
+    "ambient_temperature",
+    "airflow_speed",
+    "drying_rack_occupancy",
+    "moisture_load_index",
+    "airflow_per_meter",
+    "fabric_material_encoded"
+  ],
+  "metrics": {
+    "mae": 0.368853,
+    "rmse": 0.448382,
+    "r2_score": 0.989953
+  }
+}
